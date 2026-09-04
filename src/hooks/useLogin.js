@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { login as loginRequest } from '../services/authService'
+import { login as loginRequest, saveSession } from '../services/authService'
 
 export const useLogin = () => {
     const [isLoading, setIsLoading] = useState(false)
@@ -9,7 +9,9 @@ export const useLogin = () => {
         setIsLoading(true)
         setError(null)
         try {
-            return await loginRequest(credentials)
+            const session = await loginRequest(credentials)
+            saveSession(session)
+            return session
         } catch (err) {
             setError(err.message ?? 'No se pudo iniciar sesión')
             throw err
