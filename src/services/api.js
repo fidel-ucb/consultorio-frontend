@@ -1,3 +1,5 @@
+import { getSession } from './session'
+
 const API_BASE_URL = 'http://localhost:5110'
 
 export class ApiError extends Error {
@@ -10,10 +12,13 @@ export class ApiError extends Error {
 }
 
 export const apiRequest = async (path, options = {}) => {
+    const token = getSession()?.token
+
     const response = await fetch(`${API_BASE_URL}${path}`, {
         ...options,
         headers: {
             'Content-Type': 'application/json',
+            ...(token ? { Authorization: `Bearer ${token}` } : {}),
             ...options.headers,
         },
     })
