@@ -27,7 +27,7 @@ const PlannerCalendar = ({
 
     return (
         <div className="overflow-x-auto rounded-md border border-neutral/20 bg-white shadow-sm">
-            <div className="grid min-w-[960px] grid-cols-[64px_repeat(7,minmax(130px,1fr))]">
+            <div className="grid min-w-240 grid-cols-[64px_repeat(7,minmax(130px,1fr))]">
                 <div className="border-b border-r border-neutral/15 p-3" />
                 {days.map((day) => (
                     <button
@@ -60,7 +60,7 @@ const PlannerCalendar = ({
                                                 <p className="truncate text-neutral/65">Psic. {appointment.psychologistName}</p>
                                             )}
                                             {(onEdit || onDelete) && (
-                                                <div className="mt-2 flex gap-1">
+                                                <div className="mt-2 flex flex-col gap-1">
                                                     {onEdit && (
                                                         <button
                                                             type="button"
