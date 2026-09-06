@@ -5,10 +5,10 @@ import Avatar from '../ui/Avatar'
 import { clearSession, getSession } from '../../services/authService'
 
 const navItems = [
-    { label: 'Área Profesional', path: '/dashboard', implemented: false },
-    { label: 'Área Paciente', path: '/patient-dashboard', implemented: false },
-    { label: 'Gestor de Pacientes', path: '/patient-management', implemented: true },
-    { label: 'Agenda', path: '/planner', implemented: false },
+    { label: 'Área Profesional', path: '/dashboard', roles: ['Psychologist'] },
+    { label: 'Área Paciente', path: '/patient-dashboard', roles: ['Patient'] },
+    { label: 'Gestor de Pacientes', path: '/patient-management', roles: ['Admin', 'Psychologist'] },
+    { label: 'Agenda', path: '/planner', roles: ['Admin', 'Psychologist'] },
 ]
 
 const navItemClasses = ({ isActive }) =>
@@ -93,8 +93,8 @@ const Sidebar = () => {
                     </button>
                 </div>
                 <nav className="mt-6 flex flex-1 flex-col gap-0.5 px-3">
-                    {navItems.map((item) =>
-                        item.implemented ? (
+                    {navItems.filter((item) => item.roles.some((itemRole) => session?.roles?.includes(itemRole))).map((item) =>
+                        (
                             <NavLink
                                 key={item.path}
                                 to={item.path}
@@ -103,13 +103,6 @@ const Sidebar = () => {
                             >
                                 {item.label}
                             </NavLink>
-                        ) : (
-                            <span
-                                key={item.path}
-                                className="-ml-0.5 cursor-not-allowed border-l-3 border-transparent px-4 py-2.5 text-[0.95rem] font-medium text-white/40"
-                            >
-                                {item.label}
-                            </span>
                         )
                     )}
                 </nav>

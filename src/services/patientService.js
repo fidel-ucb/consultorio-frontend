@@ -4,6 +4,8 @@ const BASE_PATH = '/api/patients'
 
 export const getPatients = () => apiRequest(BASE_PATH)
 
+export const getCurrentPatient = () => apiRequest(`${BASE_PATH}/me`)
+
 export const createPatient = (patient) =>
     apiRequest(BASE_PATH, {
         method: 'POST',

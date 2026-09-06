@@ -10,8 +10,13 @@ const Login = () => {
 
     const handleSubmit = async (data) => {
         try {
-            await login({ email: data.email, password: data.password })
-            navigate('/patient-management', { replace: true })
+            const session = await login({ email: data.email, password: data.password })
+            const destination = session.roles?.includes('Admin')
+                ? '/planner'
+                : session.roles?.includes('Psychologist')
+                  ? '/dashboard'
+                  : '/patient-dashboard'
+            navigate(destination, { replace: true })
         } catch {
             // error message is already tracked by useLogin
         }
@@ -36,7 +41,7 @@ const Login = () => {
                             <span className="font-semibold">Admin</span>
                         </li>
                         <li className="flex justify-between gap-3">
-                            <span>doctor.garcia@consultorio.com</span>
+                            <span>psic.garcia@consultorio.com</span>
                             <span className="font-semibold">Psicólogo</span>
                         </li>
                         <li className="flex justify-between gap-3">
