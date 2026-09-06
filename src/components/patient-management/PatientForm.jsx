@@ -42,11 +42,7 @@ const PatientForm = ({ initialValues, onSubmit, onCancel, isSaving }) => {
     }
 
     return (
-        <section className="mx-auto mb-8 w-full max-w-4xl rounded-md border border-neutral/20 bg-white p-4 md:p-6">
-            <h2 className="mb-4 font-display text-xl font-semibold text-neutral">
-                {initialValues ? 'Editar paciente' : 'Nuevo paciente'}
-            </h2>
-            <form className="flex flex-col gap-4 rounded-md bg-background p-4 md:p-6" onSubmit={handleSubmit}>
+        <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
                 <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                     <FormField
                         label="Nombre *"
@@ -113,8 +109,7 @@ const PatientForm = ({ initialValues, onSubmit, onCancel, isSaving }) => {
                         {isSaving ? 'Guardando...' : 'Guardar paciente'}
                     </Button>
                 </div>
-            </form>
-        </section>
+        </form>
     )
 }
 
