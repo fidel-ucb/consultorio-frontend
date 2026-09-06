@@ -5,7 +5,7 @@ import { usePatients } from '../hooks/usePatients'
 import { getSession } from '../services/session'
 
 const Dashboard = () => {
-    const { appointments, isLoading: appointmentsLoading, error: appointmentsError } = useAppointments()
+    const { appointments, isLoading: appointmentsLoading, error: appointmentsError } = useAppointments({ currentOnly: true })
     const { patients, isLoading: patientsLoading, error: patientsError } = usePatients()
     const session = getSession()
     const today = new Date().toDateString()
